@@ -192,14 +192,14 @@ class HotelProgram
             puts "If you are unsure of the names, type LIST to display them here..."
             exit_select = false
             while !exit_select
-                puts ":>"
+                print ":> "
                 input = gets.chomp
                 if input == "LIST"
                     cmd_list_hotels()
                 else
                     @selected_hotel = @chain.select_hotel(input)
                     puts "#{@selected_hotel.name} is now selected..." if @selected_hotel
-                    exit_select = true
+                    exit_select = true if @selected_hotel
                 end
             end
         else
