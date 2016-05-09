@@ -34,11 +34,7 @@ class Hotel
         guests = []
         guests << Guest.new(lead_guest)
         others.times { guests << Guest.new() }
-        if get_room(rm_nbr)
-            return @rooms[get_room(rm_nbr)].check_in(guests)
-        else
-            return false
-        end
+        return get_room(rm_nbr) ? @rooms[get_room(rm_nbr)].check_in(guests) : false
     end
 
     def check_out(rm_nbr)

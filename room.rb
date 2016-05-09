@@ -22,11 +22,7 @@ class Room
     end
 
     def guest_details
-        if empty?
-            return nil
-        else
-            return {lead: @guests[0].name, others: (@guests.length-1)}
-        end
+        return empty? ? nil : {lead: @guests[0].name, others: (@guests.length-1)}
     end
 
     def check_in(guests)
@@ -40,11 +36,7 @@ class Room
 
     def check_out()
         @guests = []
-        if @guests.length <= 0
-            return true
-        else
-            return false
-        end
+        return @guests.length <= 0 ? true : false
     end
 
     def empty?

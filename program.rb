@@ -13,6 +13,7 @@ class HotelProgram
     end
 
     def start
+        cmd_show_help()
         while @running
             u_string = get_user_input()
             run_command(u_string)
@@ -220,12 +221,8 @@ class HotelProgram
                     print "Room number: "
                     number = gets.chomp.to_i()
                 end
-                others = 0
-                while others == 0
-                    print "Number of other guests: "
-                    others = gets.chomp.to_i()
-                end
-
+                print "Number of other guests: "
+                others = gets.chomp.to_i()
                 if @chain.check_in(@selected_hotel.name, number, guest, others)
                     puts "#{guest} has now been checked into room #{number}"
                 else
@@ -300,12 +297,8 @@ class HotelProgram
                     number = "#{r[:number]}"
                     type =  "#{r[:type]}"
                     sleeps = "#{r[:sleeps]}"
-                    if 6 - number.length> 0
-                        number << " "*(6 - number.length)
-                    end
-                    if 15 - type.length > 0
-                        type << " "*(15 - type.length)
-                    end
+                    number << " "*(6 - number.length) if 6 - number.length> 0
+                    type << " "*(15 - type.length) if 15 - type.length > 0
                     puts "-"*37
                     puts "| #{number} | #{type} | #{sleeps}      |"
                 end
@@ -325,12 +318,8 @@ class HotelProgram
                 for r in rooms
                     type = r[0].to_s()
                     number = r[1].to_s()
-                    if 15 - type.length > 0
-                        type << " "*(15-type.length)
-                    end
-                    if 16 - number.length > 0
-                        number << " "*(16-number.length)
-                    end
+                    type << " "*(15-type.length) if 15 - type.length > 0
+                    number << " "*(16-number.length) if 16 - number.length > 0
                     puts "-"*38
                     puts "| #{type} | #{number} |"
                 end
@@ -344,39 +333,26 @@ class HotelProgram
 
     def cmd_show_help()
 
-        print "\n\nHotelMaster v1.1"
-
-        # when "help", "h"
-        #     cmd_show_help()
-        # when "create chain", "cc"
-        #     cmd_create_chain()
-        # when "chain bust", "cb"
-        #     cmd_chain_gone_bust()
-        # when "create hotel", "ch"
-        #     cmd_create_hotel()
-        # when "demolish hotel", "dh"
-        #     cmd_demolish_hotel()
-        # when "list hotels", "lh"
-        #     cmd_list_hotels()
-        # when "select hotel", "sh"
-        #     cmd_select_hotel()
-        # when "view selected hotel", "vsh", "vs"
-        #     cmd_view_selected_hotel()
-        # when "check in", "ci"
-        #     cmd_check_in()
-        # when "check out", "co"
-        #     cmd_check_out()
-        # when "guest details", "gd"
-        #     cmd_guest_details()
-        # when "rooms avaliable", "ra"
-        #     cmd_rooms_avaliable()
-        # when "room types avaliable", "rta"
-        #     cmd_room_types_avaliable()
-        # when "exit", "q"
+        print "\n\nHotelMaster v1.1\n\n"
 
 
-        puts "Lots of helpful stuff..."
-        print "\n\n\n.....\n"
+        puts "help | h                      : prints out this help menu"
+        puts "create chain | cc             : creates a new hotel chain - required for any hotels"
+        puts "chain bust | cb               : your chain has gone bust - this will delete the chain and all hotels"
+        puts "create hotel | ch             : creates a new hotel in your chain"
+        puts "demolish hotel | dh           : destroys the currently seleted hotel and all of it's information"
+        puts "list hotel | lh               : list all the hotels that have been created"
+        puts "select hotel | sh             : allows you to select a hotel to preform actions on"
+        puts "view selected hotel | vsh     : displays the name of the hotel currently selected"
+        puts "check in | ci                 : allows you to check a guest into a room within the currently selected hotel"
+        puts "check out | co                : allows you to check out a guest from a room within the current hotel"
+        puts "guest details | gd            : displays the details of the guests staying in a paticular room in the current hotel"
+        puts "rooms avaliable | ra          : displays all the rooms that are avaliable and their types within the current hotel"
+        puts "room types avaliable | rta    : displays the types of rooms avaliable and the number of them"
+        puts "exit | q                      : exits the program - everything will be destroyed"
+
+        print "\n\n"
+
     end
 
     def close()
